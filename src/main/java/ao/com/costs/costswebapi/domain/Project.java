@@ -36,6 +36,9 @@ public class Project {
     @Column(name="budget")
     private float budget;
 
+    @Column(name="usedBudget")
+    private float usedBudget;
+
     @Enumerated(EnumType.STRING)
     @Column(name="category")
     private Category category;
@@ -43,11 +46,8 @@ public class Project {
     @Column(name="serviceID")
     private Long serviceID;
 
-    @Column(name="numberOfServices")
-    private Long numberOfServices;
-
-    @Column(name="usedBudget")
-    private float usedBudget;
+    @Column(name="numServices")
+    private Long numServices;
 
     @Column(name="createdAt")
     private Date createdAt;

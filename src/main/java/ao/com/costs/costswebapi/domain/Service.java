@@ -25,9 +25,6 @@ public class Service {
     @Column(name="id")
     private Long id;
 
-    @Column(name="projectID")
-    private Long projectID;
-
     @Column(name="name")
     private String name;
 
@@ -37,7 +34,7 @@ public class Service {
     @Column(name="description")
     private String description;
 
-    @Column(name="numberOfServices")
-    private Long numberOfServices;
+    @Column(name="projectID")
+    private Long projectID;
 
 }
