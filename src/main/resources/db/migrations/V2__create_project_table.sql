@@ -10,5 +10,5 @@ CREATE TABLE IF NOT EXISTS costsweb.project(
     deadline DATETIME,
     PRIMARY KEY(id),
     FOREIGN KEY(serviceID) REFERENCES service(id),
-    FOREIGN KEY(numberOfServices) REFERENCES service(COUNT(id)) 
+    FOREIGN KEY(numberOfServices) REFERENCES service(numberOfServices) 
 );
