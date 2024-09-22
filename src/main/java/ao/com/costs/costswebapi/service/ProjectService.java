@@ -46,4 +46,13 @@ public class ProjectService {
 
         return ResponseEntity.ok().build();
     }
+
+    // DELETE's a project
+    public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectNotFoundException{
+        Project project = projectRepository.findById(id).orElseThrow(()-> new ProjectNotFoundException(id));
+
+        projectRepository.delete(project);
+
+        return ResponseEntity.ok().build();
+    }
 }
