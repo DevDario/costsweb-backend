@@ -1,9 +1,9 @@
 package ao.com.costs.costswebapi.enums;
 
 public enum Category {
-    DEVELOPMENT("Development"),
-    INFRASTRUCTURE("Infrastructure"),
-    PLANNING("Planning");
+    DEVELOPMENT("DEVELOPMENT"),
+    INFRASTRUCTURE("INFRASTRUCTURE"),
+    PLANNING("PLANNING");
 
     private String category;
 
