@@ -43,8 +43,8 @@ public class Project {
     @Column(name="category")
     private Category category;
 
-    @Column(name="serviceID")
-    private Long serviceID;
+    //@Column(name="serviceID")
+    //private Long serviceID;
 
     @Column(name="numServices")
     private Long numServices;
