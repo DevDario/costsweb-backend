@@ -16,14 +16,9 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @GetMapping("/api/allProjects")
-    public List<Project> getAllProjects() throws Exception {
-        try{
-
-            return projectService.getAllProjects();
-        }catch(Exception error){
-            throw new Exception("there's no projects saved !");
-        }
+    @GetMapping("/project/all")
+    public List<Project> getAllProjects(){
+        return projectService.getAllProjects();
     }
     
 }
