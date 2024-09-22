@@ -18,6 +18,13 @@ public class ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
+    // CREATE a new Project
+    public ResponseEntity<?> createProject(@RequestBody Project project){
+        projectRepository.save(project);
+
+        return ResponseEntity.ok().build();
+    }
+
     // GET's all projects
     public List<Project> getAllProjects(){
         return projectRepository.findAll();
