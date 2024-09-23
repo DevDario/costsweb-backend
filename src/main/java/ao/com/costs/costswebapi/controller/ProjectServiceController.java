@@ -15,6 +15,7 @@ import ao.com.costs.costswebapi.exception.ProjectNotFoundException;
 import ao.com.costs.costswebapi.repository.ProjectServiceRepository;
 import ao.com.costs.costswebapi.service.ProjectServiceService;
 
+
 @RestController
 public class ProjectServiceController {
     
@@ -37,6 +38,13 @@ public class ProjectServiceController {
     public List<ProjectService> getAllServices() {
         return projectServiceRepository.findAll();
     }
+
+    // GET's all services from a single project
+    @GetMapping("/project/{projectid}/service/services")
+    public List<ProjectService> getServices(@PathVariable Long projectid) {
+        return projectServiceService.getServicesFromProject(projectid);
+    }
+    
     
 
 }
