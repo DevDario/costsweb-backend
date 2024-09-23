@@ -53,4 +53,9 @@ public class ProjectServiceService {
     public List<ProjectService> getServicesFromProject(@PathVariable Long projectid){
         return projectServiceRepository.findByProjectid(projectid);
     }
+
+    // GET's all services from all projects
+    public List<ProjectService> AllServices(){
+        return projectServiceRepository.findAll();
+    }
 }
