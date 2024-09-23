@@ -1,5 +1,7 @@
 package ao.com.costs.costswebapi.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,4 +49,8 @@ public class ProjectServiceService {
 
     }
 
+    // GET's all services from a project
+    public List<ProjectService> getServicesFromProject(@PathVariable Long projectid){
+        return projectServiceRepository.findByProjectid(projectid);
+    }
 }
