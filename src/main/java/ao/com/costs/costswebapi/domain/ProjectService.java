@@ -34,7 +34,7 @@ public class ProjectService {
     @Column(name="description")
     private String description;
 
-    @Column(name="projectID")
-    private Long projectID;
+    @Column(name="projectid")
+    private Long projectid;
 
 }
