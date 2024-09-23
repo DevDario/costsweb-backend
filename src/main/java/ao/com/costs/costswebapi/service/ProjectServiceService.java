@@ -58,4 +58,23 @@ public class ProjectServiceService {
     public List<ProjectService> AllServices(){
         return projectServiceRepository.findAll();
     }
+
+    // DELETE's a service
+    public ResponseEntity<?> deleteService(@PathVariable Long projectid,@PathVariable Long serviceid) throws ProjectNotFoundException, Exception{
+        
+        Project project = projectRepository.findById(projectid).orElseThrow(()-> new ProjectNotFoundException(projectid));
+
+        ProjectService service = projectServiceRepository.findById(serviceid).orElseThrow(
+            () -> new Exception(String.format("There's no service associated with id of %s",serviceid))
+        );
+
+        project.setNumServices(project.getNumServices() - 1);
+        project.setBudget(project.getBudget() + service.getBudget());
+        project.setUsedBudget(project.getUsedBudget() - service.getBudget());
+
+        projectServiceRepository.delete(service);
+        projectRepository.save(project);
+
+        return ResponseEntity.ok().build();
+    }
 }
