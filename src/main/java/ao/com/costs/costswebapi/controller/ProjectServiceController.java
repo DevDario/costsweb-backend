@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ao.com.costs.costswebapi.domain.ProjectService;
 import ao.com.costs.costswebapi.exception.ProjectNotFoundException;
-import ao.com.costs.costswebapi.repository.ProjectServiceRepository;
 import ao.com.costs.costswebapi.service.ProjectServiceService;
 
 
@@ -21,9 +20,6 @@ public class ProjectServiceController {
     
     @Autowired
     ProjectServiceService projectServiceService;
-
-    @Autowired
-    ProjectServiceRepository projectServiceRepository;
 
 
     // CREATE's a new service 'inside' a project
