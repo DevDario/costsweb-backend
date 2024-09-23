@@ -36,7 +36,7 @@ public class ProjectServiceController {
     // GET's all services from all projects
     @GetMapping("/service/all")
     public List<ProjectService> getAllServices() {
-        return projectServiceRepository.findAll();
+        return projectServiceService.AllServices();
     }
 
     // GET's all services from a single project
