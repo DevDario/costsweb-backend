@@ -44,7 +44,6 @@ public class ProjectService {
         project.setBudget(projectDetails.getBudget());
         project.setCategory(projectDetails.getCategory());
         project.setNumServices(projectDetails.getNumServices());
-        //project.setServiceID(projectDetails.getServiceID());
         project.setUsedBudget(projectDetails.getUsedBudget());
         project.setDeadline(projectDetails.getDeadline());
         project.setCreatedAt(projectDetails.getCreatedAt());
