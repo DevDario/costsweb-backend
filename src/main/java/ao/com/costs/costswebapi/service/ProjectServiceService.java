@@ -75,6 +75,8 @@ public class ProjectServiceService {
         projectServiceRepository.delete(service);
         projectRepository.save(project);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity
+                .ok()
+                .body(service.getName() + " service was deleted from your " + project.getName() + " project !");
     }
 }
