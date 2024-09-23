@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,6 +42,10 @@ public class ProjectServiceController {
         return projectServiceService.getServicesFromProject(projectid);
     }
     
-    
+    // DELETE's a service
+    @DeleteMapping("/project/{projectid}/service/services/{serviceid}")
+    public ResponseEntity<?> deleteService(@PathVariable Long projectid, @PathVariable Long serviceid) throws ProjectNotFoundException,Exception{
+        return projectServiceService.deleteService(projectid, serviceid);
+    }
 
 }
