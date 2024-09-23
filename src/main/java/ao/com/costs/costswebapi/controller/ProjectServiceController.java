@@ -17,9 +17,10 @@ public class ProjectServiceController {
     @Autowired
     ProjectServiceService projectServiceService;
 
-    @PostMapping("/project/{projectID}/services/new")
-    public ResponseEntity<?> addNewService(@PathVariable Long projectID, @RequestBody ProjectService newService) throws ProjectNotFoundException{
-        return projectServiceService.addNewService(projectID, newService) ;
+
+    @PostMapping("/project/{projectid}/services/new")
+    public ResponseEntity<?> addNewService(@PathVariable Long projectid, @RequestBody ProjectService newService) throws ProjectNotFoundException,Exception{
+        return projectServiceService.addNewService(projectid, newService) ;
     }
 
 }
