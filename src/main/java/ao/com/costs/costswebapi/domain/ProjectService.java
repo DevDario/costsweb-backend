@@ -18,7 +18,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name="service")
-public class Service {
+public class ProjectService {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class Service {
     @Column(name="description")
     private String description;
 
-    @Column(name="projectID")
-    private Long projectID;
+    @Column(name="projectid")
+    private Long projectid;
 
 }
