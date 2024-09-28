@@ -24,7 +24,7 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
-    @PostMapping("project/new")
+    @PostMapping("/project/new")
     public ResponseEntity<?> createProject(@RequestBody Project project) {
         return projectService.createProject(project);
     }
@@ -35,17 +35,17 @@ public class ProjectController {
         return projectService.getAllProjects();
     }
 
-    @GetMapping("project/{id}")
+    @GetMapping("/project/{id}")
     public Project getProject(@PathVariable Long id) throws ProjectNotFoundException{
         return projectService.getSingleProject(id);
     }
 
-    @PutMapping("project/edit/{id}")
+    @PutMapping("/project/edit/{id}")
     public ResponseEntity<?> editProject(@PathVariable Long id, @RequestBody Project projectDetails) throws ProjectNotFoundException {
         return projectService.editProject(id, projectDetails);
     }
 
-    @DeleteMapping("project/del/{id}")
+    @DeleteMapping("/project/del/{id}")
     public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectNotFoundException{
         return projectService.deleteProject(id);
     }
