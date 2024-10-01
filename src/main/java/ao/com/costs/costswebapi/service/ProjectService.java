@@ -3,6 +3,7 @@ package ao.com.costs.costswebapi.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,6 +60,8 @@ public class ProjectService {
 
         projectRepository.delete(project);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body("Project Deleted !");
     }
 }
