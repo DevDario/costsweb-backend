@@ -37,7 +37,6 @@ public class ProjectServiceService {
 
         projectServiceRepository.save(newService);
 
-        project.setNumServices(project.getNumServices() + 1);
         project.setBudget(project.getBudget() - newService.getBudget());
         project.setUsedBudget(project.getUsedBudget() + newService.getBudget());
 
@@ -51,7 +50,7 @@ public class ProjectServiceService {
 
     // GET's all services from a project
     public List<ProjectService> getServicesFromProject(@PathVariable Long projectid){
-        return projectServiceRepository.findByProjectid(projectid);
+        return projectServiceRepository.findByProject_id(projectid);
     }
 
     // GET's all services from all projects
@@ -68,7 +67,6 @@ public class ProjectServiceService {
             () -> new Exception(String.format("There's no service associated with id of %s",serviceid))
         );
 
-        project.setNumServices(project.getNumServices() - 1);
         project.setBudget(project.getBudget() + service.getBudget());
         project.setUsedBudget(project.getUsedBudget() - service.getBudget());
 
