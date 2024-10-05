@@ -1,5 +1,6 @@
 package ao.com.costs.costswebapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,20 +28,18 @@ public class ProjectService {
     @Column(name="id")
     private Long id;
 
-    @Column(name="name")
+    @Column(name="name", nullable = false)
     private String name;
 
-    @Column(name="budget")
+    @Column(name="budget", nullable = false)
     private float budget;
 
-    @Column(name="description")
+    @Column(name="description", nullable = false)
     private String description;
 
-    @Column(name="projectid")
-    private Long projectid;
-
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="projectid")
+    @JoinColumn(name = "projectid", nullable = false)
     private Project project;
 
 }
