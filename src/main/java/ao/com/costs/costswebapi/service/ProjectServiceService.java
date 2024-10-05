@@ -35,6 +35,8 @@ public class ProjectServiceService {
                     .body("There's not enough budget for this service");
         }
 
+        newService.setProject(project);
+
         projectServiceRepository.save(newService);
 
         project.setBudget(project.getBudget() - newService.getBudget());
