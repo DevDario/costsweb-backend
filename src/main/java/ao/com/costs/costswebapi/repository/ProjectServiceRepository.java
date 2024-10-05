@@ -9,5 +9,5 @@ import ao.com.costs.costswebapi.domain.ProjectService;
 
 public interface ProjectServiceRepository extends JpaRepository<ProjectService, Long> {
 
-    List<ProjectService> findByProjectid(Long projectid);
+    List<ProjectService> findByProject_id(Long projectid);
 }
