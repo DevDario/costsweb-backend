@@ -44,13 +44,11 @@ public class ProjectService {
         project.setName(projectDetails.getName());
         project.setBudget(projectDetails.getBudget());
         project.setCategory(projectDetails.getCategory());
-        project.setUsedBudget(projectDetails.getUsedBudget());
-        project.setDeadline(projectDetails.getDeadline());
-        project.setCreatedAt(projectDetails.getCreatedAt());
 
         projectRepository.save(project);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok()
+                .body("your project has been successfully updated");
     }
 
     // DELETE's a project
