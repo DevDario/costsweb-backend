@@ -23,7 +23,8 @@ public class ProjectService {
     public ResponseEntity<?> createProject(@RequestBody Project project){
         projectRepository.save(project);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok()
+                .body("your project was successfully created !");
     }
 
     // GET's all projects
