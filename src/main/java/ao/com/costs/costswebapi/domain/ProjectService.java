@@ -34,7 +34,7 @@ public class ProjectService {
     @Column(name="budget", nullable = false)
     private float budget;
 
-    @Column(name="description", nullable = false)
+    @Column(name="description")
     private String description;
 
     @JsonBackReference
