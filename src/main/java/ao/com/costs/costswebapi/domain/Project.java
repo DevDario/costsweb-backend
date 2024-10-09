@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Getter
 @Setter
@@ -38,6 +39,7 @@ public class Project {
     @Column(name="category", nullable = false)
     private Category category;
 
+    @CreationTimestamp
     @Column(name="createdAt")
     private Date createdAt;
 
