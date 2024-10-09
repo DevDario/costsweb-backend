@@ -38,7 +38,7 @@ public class Project {
     @Column(name="category", nullable = false)
     private Category category;
 
-    @Column(name="createdAt", nullable = false)
+    @Column(name="createdAt")
     private Date createdAt;
 
     @Column(name="deadline")
