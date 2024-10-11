@@ -1,5 +1,6 @@
 package ao.com.costs.costswebapi.domain;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class Project {
 
     @CreationTimestamp
     @Column(name="createdAt")
-    private Date createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name="deadline")
     private Date deadline;
