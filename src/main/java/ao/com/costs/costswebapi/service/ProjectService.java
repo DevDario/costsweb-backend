@@ -1,5 +1,9 @@
 package ao.com.costs.costswebapi.service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +25,8 @@ public class ProjectService {
 
     // CREATE a new Project
     public ResponseEntity<?> createProject(@RequestBody Project project){
+        project.setServices(List.of());
+        project.setCreatedAt(LocalDateTime.now());
         projectRepository.save(project);
 
         return ResponseEntity.ok()
