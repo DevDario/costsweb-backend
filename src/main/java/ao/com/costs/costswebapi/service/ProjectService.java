@@ -1,9 +1,6 @@
 package ao.com.costs.costswebapi.service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +21,7 @@ public class ProjectService {
     ProjectRepository projectRepository;
 
     // CREATE a new Project
-    public ResponseEntity<?> createProject(@RequestBody Project project){
+    public ResponseEntity<String> createProject(@RequestBody Project project){
         project.setServices(List.of());
         project.setCreatedAt(LocalDateTime.now());
         projectRepository.save(project);
@@ -44,7 +41,7 @@ public class ProjectService {
     }
 
     // EDIT's(PUT) a project
-    public ResponseEntity<?> editProject(@PathVariable Long id, @RequestBody Project projectDetails) throws ProjectNotFoundException{
+    public ResponseEntity<String> editProject(@PathVariable Long id, @RequestBody Project projectDetails) throws ProjectNotFoundException{
         
         Project project = projectRepository.findById(id).orElseThrow(()-> new ProjectNotFoundException(id));
 
@@ -59,7 +56,7 @@ public class ProjectService {
     }
 
     // DELETE's a project
-    public ResponseEntity<?> deleteProject(@PathVariable Long id) throws ProjectNotFoundException{
+    public ResponseEntity<String> deleteProject(@PathVariable Long id) throws ProjectNotFoundException{
         Project project = projectRepository.findById(id).orElseThrow(()-> new ProjectNotFoundException(id));
 
         projectRepository.delete(project);

@@ -25,7 +25,7 @@ public class ProjectServiceService {
     ProjectServiceRepository projectServiceRepository;
     
     // ADD's a new service to a project
-    public ResponseEntity<?> addNewService(@PathVariable Long projectid, @RequestBody ProjectService newService) throws ProjectNotFoundException,Exception{
+    public ResponseEntity<String> addNewService(@PathVariable Long projectid, @RequestBody ProjectService newService) throws ProjectNotFoundException,Exception{
 
         Project project = projectRepository.findById(projectid).orElseThrow(()-> new ProjectNotFoundException(projectid));
 
@@ -61,7 +61,7 @@ public class ProjectServiceService {
     }
 
     // DELETE's a service
-    public ResponseEntity<?> deleteService(@PathVariable Long projectid,@PathVariable Long serviceid) throws ProjectNotFoundException, Exception{
+    public ResponseEntity<String> deleteService(@PathVariable Long projectid,@PathVariable Long serviceid) throws ProjectNotFoundException, Exception{
         
         Project project = projectRepository.findById(projectid).orElseThrow(()-> new ProjectNotFoundException(projectid));
 

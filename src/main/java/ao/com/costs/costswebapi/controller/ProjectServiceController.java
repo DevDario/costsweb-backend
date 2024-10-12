@@ -27,7 +27,7 @@ public class ProjectServiceController {
 
     // CREATE's a new service 'inside' a project
     @PostMapping("/project/{projectid}/services/new")
-    public ResponseEntity<?> addNewService(@PathVariable Long projectid, @RequestBody ProjectService newService) throws ProjectNotFoundException,Exception{
+    public ResponseEntity<String> addNewService(@PathVariable Long projectid, @RequestBody ProjectService newService) throws ProjectNotFoundException,Exception{
         return projectServiceService.addNewService(projectid, newService) ;
     }
 
@@ -46,7 +46,7 @@ public class ProjectServiceController {
     
     // DELETE's a service
     @DeleteMapping("/project/{projectid}/service/services/{serviceid}")
-    public ResponseEntity<?> deleteService(@PathVariable Long projectid, @PathVariable Long serviceid) throws ProjectNotFoundException,Exception{
+    public ResponseEntity<String> deleteService(@PathVariable Long projectid, @PathVariable Long serviceid) throws ProjectNotFoundException,Exception{
         return projectServiceService.deleteService(projectid, serviceid);
     }
 
