@@ -162,7 +162,7 @@ $ http GET :8080/project/1/service/services
 
 - List all services from all projects
 ```bash
-$ http PUT :8080/service/all
+$ http GET :8080/service/all
 
 [
     {
