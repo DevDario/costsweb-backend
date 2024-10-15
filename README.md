@@ -120,3 +120,64 @@ http DELETE :8080/project/del/1
 ```
 
 ### 2. Operations(CRUD) with Project Services
+
+- Add(Create) a new service to a project
+```
+$ http POST :8080/project/1/services/new name="design" budget="500"
+
+[
+  {
+    "id": 1,
+	"name": "project1",
+	"budget": 500.0,
+	"usedBudget": 500.0,
+	"category": "DEVELOPMENT",
+	"createdAt": "2024-10-14T00:00:00.000+00:00",
+	"deadline": "2024-10-20T00:00:00.000+00:00",
+	"services": [
+	    {
+	        "id":1,
+	        "name":"design",
+	        "budget":500.0,
+	        "description":""
+	    }
+	]
+  }
+]
+```
+
+- List all services from a project
+```
+$ http GET :8080/project/1/service/services
+
+[
+    {
+	    "id":1,
+	    "name":"design",
+	    "budget":500.0,
+	    "description":""
+	}
+]
+```
+
+- List all services from all projects
+```
+$ http PUT :8080/service/all
+
+[
+    {
+	    "id":1,
+	    "name":"design",
+	    "budget":500.0,
+	    "description":""
+	}
+]
+
+```
+
+- Delete a service from a project
+```
+http DELETE :8080/project/1/service/services/1
+
+[ ]
+```
