@@ -8,7 +8,7 @@
 
 > Backend Infrastructure for [Costs-Web]([https://github.com/DevDario/Costs-Web) Project, A minimal **Project Manager System**
 
-## Tecnologies
+## Technologies
 
 - [Spring Boot](https://spring.io/projects/spring-boot)
 - [Spring MVC](https://docs.spring.io/spring-framework/reference/web/webmvc.html)
