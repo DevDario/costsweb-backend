@@ -1,7 +1,6 @@
 package ao.com.costs.costswebapi.domain;
 
 import ao.com.costs.costswebapi.enums.AuthProvider;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,10 +27,10 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "auth_provider")
     private AuthProvider authProvider;
 
-    @OneToMany(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Project> projects;
 }
