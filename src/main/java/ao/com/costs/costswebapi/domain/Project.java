@@ -47,6 +47,10 @@ public class Project {
     @Column(name="deadline")
     private Date deadline;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @OneToMany(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<ProjectService> services;
