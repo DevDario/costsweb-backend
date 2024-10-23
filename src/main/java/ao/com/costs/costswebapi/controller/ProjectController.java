@@ -20,7 +20,7 @@ import ao.com.costs.costswebapi.service.ProjectService;
 
 
 @RestController
-@CrossOrigin(origins="http://127.0.0.1:3333/")
+@CrossOrigin(origins="http://localhost:3333/")
 public class ProjectController {
     
     @Autowired
