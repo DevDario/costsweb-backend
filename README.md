@@ -46,8 +46,8 @@ $ ./mvnw clean package
 $ java -jar target/costswebapi-0.0.1-SNAPSHOT.jar
 ```
 
-You can access the API here: [localhost:8080](http://localhost:8080). <br>
-And you can see Swagger running right here [localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+You can access the API here: [localhost:8081](http://localhost:8081). <br>
+And you can see Swagger running right here [localhost:8081/swagger-ui.html](http://localhost:8081/swagger-ui.html)
 
 ## API Endpoints
 1. Operations(CRUD) with Projects
@@ -59,7 +59,7 @@ And you can see Swagger running right here [localhost:8080/swagger-ui.html](http
 
 - Create a new Project
 ```bash
-$ http POST :8080/project/new name="project1" budget=1000 usedBudget:0.0 category:"DEVELOPMENT" deadline:"2024-10-14T00:00:00.000+00:00"
+$ http POST :8081/project/new name="project1" budget=1000 usedBudget:0.0 category:"DEVELOPMENT" deadline:"2024-10-14T00:00:00.000+00:00"
 
 [
   {
@@ -77,7 +77,7 @@ $ http POST :8080/project/new name="project1" budget=1000 usedBudget:0.0 categor
 
 - List all Projects
 ```bash
-$ http GET :8080/project/all
+$ http GET :8081/project/all
 
 [
   {
@@ -95,7 +95,7 @@ $ http GET :8080/project/all
 
 - Update a Project
 ```bash
-$ http PUT :8080/project/edit/1 name="project1" budget=2000 usedBudget:0.0 category:"PLANNING" deadline:"2024-10-14T00:00:00.000+00:00"
+$ http PUT :8081/project/edit/1 name="project1" budget=2000 usedBudget:0.0 category:"PLANNING" deadline:"2024-10-14T00:00:00.000+00:00"
 
 [
   {
@@ -114,7 +114,7 @@ $ http PUT :8080/project/edit/1 name="project1" budget=2000 usedBudget:0.0 categ
 
 - Delete a Project
 ```bash
-http DELETE :8080/project/del/1
+http DELETE :8081/project/del/1
 
 [ ]
 ```
@@ -123,7 +123,7 @@ http DELETE :8080/project/del/1
 
 - Add(Create) a new service to a project
 ```bash
-$ http POST :8080/project/1/services/new name="design" budget="500"
+$ http POST :8081/project/1/services/new name="design" budget="500"
 
 [
   {
@@ -148,7 +148,7 @@ $ http POST :8080/project/1/services/new name="design" budget="500"
 
 - List all services from a project
 ```bash
-$ http GET :8080/project/1/service/services
+$ http GET :8081/project/1/service/services
 
 [
     {
@@ -162,7 +162,7 @@ $ http GET :8080/project/1/service/services
 
 - List all services from all projects
 ```bash
-$ http GET :8080/service/all
+$ http GET :8081/service/all
 
 [
     {
@@ -177,7 +177,7 @@ $ http GET :8080/service/all
 
 - Delete a service from a project
 ```bash
-http DELETE :8080/project/1/service/services/1
+http DELETE :8081/project/1/service/services/1
 
 [ ]
 ```
