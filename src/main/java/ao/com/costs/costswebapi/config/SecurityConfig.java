@@ -1,5 +1,6 @@
 package ao.com.costs.costswebapi.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -18,21 +19,25 @@ import java.util.List;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    @Autowired
+    private OAuth2LoginSuccessHandler oAuth2LoginSuccessHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/oauth2/**","/login/**","/Auth/**").permitAll()
+                        .requestMatchers("/oauth2/**","/login/**","/Auth/**","/api/user/").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS,"/**").permitAll()
-                                .anyRequest().authenticated()
+                        .anyRequest().authenticated()
                 )
                 .oauth2Login(oauth2 -> oauth2
-                                .defaultSuccessUrl("http://localhost:3333/home",true)
-                        .failureUrl("http://localhost:3333/login?error=true")
+                        .defaultSuccessUrl("http://localhost:3333/home",true)
+                        .successHandler(oAuth2LoginSuccessHandler)
+                        .failureUrl("http://localhost:3333/Auth/login?error=true")
                 )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("http://localhost:3333/login?logout=true"));
+                        .logoutSuccessUrl("http://localhost:3333/Auth/logout?logout=true"));
 
         return http.build();
     }
@@ -40,7 +45,7 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3333", "http://127.0.0.1:3333","https://costs-web.vercel.app"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3333"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Requested-With", "Accept"));
         configuration.setExposedHeaders(List.of("Authorization", "Content-Type"));
