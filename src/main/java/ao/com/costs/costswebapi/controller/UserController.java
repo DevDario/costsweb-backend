@@ -20,7 +20,7 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<User> getUserDetails(Authentication auth) throws Exception{
-        if(!(auth == null)){
+        if(auth.getPrincipal() != null){
             OAuth2User user = (OAuth2User) auth.getPrincipal();
             String email = user.getAttribute("email");
 
