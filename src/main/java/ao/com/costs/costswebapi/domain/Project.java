@@ -6,7 +6,6 @@ import java.util.List;
 
 import ao.com.costs.costswebapi.enums.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
