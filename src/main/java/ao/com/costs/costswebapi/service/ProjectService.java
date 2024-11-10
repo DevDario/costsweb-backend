@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import ao.com.costs.costswebapi.domain.User;
-import ao.com.costs.costswebapi.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
