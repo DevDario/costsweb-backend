@@ -6,6 +6,7 @@ import java.util.List;
 
 import ao.com.costs.costswebapi.enums.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -53,6 +54,6 @@ public class Project {
     private User user;
 
     @OneToMany(mappedBy="project", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference
+    @JsonManagedReference
     private List<ProjectService> services;
 }
