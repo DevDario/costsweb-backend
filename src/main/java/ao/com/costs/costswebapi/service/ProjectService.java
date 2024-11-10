@@ -2,13 +2,12 @@ package ao.com.costs.costswebapi.service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 import ao.com.costs.costswebapi.domain.User;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,36 +24,59 @@ public class ProjectService {
     UserService userService;
 
     // CREATE a new Project
-    public ResponseEntity<String> createProject(@RequestBody Project project, Authentication auth) throws Exception{
+    public ResponseEntity<String> createProjectForUser(@RequestBody Project project, String email) throws Exception{
 
-        OAuth2User principal = (OAuth2User) auth.getPrincipal();
-        String loggedUserEmail = principal.getAttribute("email");
+        Optional<User> optionalUser = Optional.ofNullable(this.userService.getUserByEmail(email));
 
-        User loggedUser = this.userService.getUserByEmail(loggedUserEmail);
+        if(optionalUser.isPresent()){
+            User loggedUser = optionalUser.get();
+            project.setServices(List.of());
+            project.setCreatedAt(LocalDateTime.now());
+            project.setUser(loggedUser);
 
-        project.setServices(List.of());
-        project.setCreatedAt(LocalDateTime.now());
-        project.setUser(loggedUser);
+            this.projectRepository.save(project);
 
-        projectRepository.save(project);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .build();
+        }else{
+            throw new RuntimeException("User not found with email: " + email);
+        }
     }
 
-    // GET's all projects
-    public List<Project> getAllProjects(){
+    // GET all projects registered
+    public List<Project> findAllProjects(){
         return projectRepository.findAll();
     }
 
-    // GET one project
-    public Project getSingleProject(Long id) throws ProjectNotFoundException{
-        return projectRepository.findById(id).orElseThrow(() -> new ProjectNotFoundException(id));
+    // GET all projects from User
+    public List<Project> findAllProjectsFromUser(String email) throws Exception{
+        Optional<User> optionalUser = Optional.ofNullable(this.userService.getUserByEmail(email));
+
+        if(optionalUser.isPresent()){
+            User loggedUser = optionalUser.get();
+            return this.projectRepository.findByUser(loggedUser);
+        }else{
+            throw new RuntimeException("User not found with email: " + email);
+        }
+    }
+
+    // GET one project from a User
+    public Project findSingleProjectFromUser(Long id, String email) throws Exception,ProjectNotFoundException{
+
+        Optional<User> optionalUser = Optional.ofNullable(this.userService.getUserByEmail(email));
+
+        if(optionalUser.isPresent()){
+            User loggeduser = optionalUser.get();
+            return projectRepository.findByIdAndUser(id,loggeduser).orElseThrow(() -> new ProjectNotFoundException(id));
+        }else{
+            throw new RuntimeException("User not found with email: " + email);
+        }
     }
 
     // EDIT's(PUT) a project
-    public ResponseEntity<String> editProject(@PathVariable Long id, @RequestBody Project projectDetails) throws ProjectNotFoundException{
+    public ResponseEntity<String> editProjectFromUser(@PathVariable Long id, @RequestBody Project projectDetails, String email) throws Exception {
         
-        Project project = this.getSingleProject(id);
+        Project project = this.findSingleProjectFromUser(id, email);
 
         project.setName(projectDetails.getName());
         project.setBudget(projectDetails.getBudget());
@@ -66,14 +88,20 @@ public class ProjectService {
                 .build();
     }
 
-    // DELETE's a project
-    public ResponseEntity<String> deleteProject(@PathVariable Long id) throws ProjectNotFoundException{
+    // DELETE a project
+    public ResponseEntity<String> deleteProjectFromUser(@PathVariable Long id, String email) throws Exception {
 
-        Project project = this.getSingleProject(id);
-        projectRepository.delete(project);
+        Optional<User> optionalUser = Optional.ofNullable(this.userService.getUserByEmail(email));
 
-        return ResponseEntity
-                    .status(HttpStatus.OK)
+        if(optionalUser.isPresent()){
+            User loggedUser = optionalUser.get();
+            this.projectRepository.deleteByIdAndUser(id, loggedUser);
+
+            return ResponseEntity.status(HttpStatus.OK)
                     .build();
+        }else{
+            throw new RuntimeException("User not found with email: " + email);
+        }
+
     }
 }
