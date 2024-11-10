@@ -4,7 +4,8 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 import ao.com.costs.costswebapi.domain.Project;
@@ -21,28 +22,33 @@ public class ProjectController {
     ProjectService projectService;
 
     @PostMapping("/project/new")
-    public ResponseEntity<String> createProject(@RequestBody Project project, Authentication auth) throws Exception {
-        return projectService.createProject(project, auth);
+    public ResponseEntity<String> createProject(@RequestBody Project project, @org.jetbrains.annotations.NotNull @AuthenticationPrincipal OAuth2User principal) throws Exception {
+        String email = principal.getAttribute("email");
+        return projectService.createProjectForUser(project, email);
     }
     
 
     @GetMapping("/project/all")
-    public List<Project> getAllProjects(){
-        return projectService.getAllProjects();
+    public List<Project> getAllProjects(@AuthenticationPrincipal OAuth2User principal) throws Exception{
+        String email = principal.getAttribute("email");
+        return projectService.findAllProjectsFromUser(email);
     }
 
     @GetMapping("/project/{id}")
-    public Project getProject(@PathVariable Long id) throws ProjectNotFoundException{
-        return projectService.getSingleProject(id);
+    public Project getProject(@PathVariable Long id, @AuthenticationPrincipal OAuth2User principal) throws ProjectNotFoundException, Exception{
+        String email = principal.getAttribute("email");
+        return projectService.findSingleProjectFromUser(id,email);
     }
 
     @PutMapping("/project/edit/{id}")
-    public ResponseEntity<String> editProject(@PathVariable Long id, @RequestBody Project projectDetails) throws ProjectNotFoundException {
-        return projectService.editProject(id, projectDetails);
+    public ResponseEntity<String> editProject(@PathVariable Long id, @RequestBody Project projectDetails, @AuthenticationPrincipal OAuth2User principal) throws Exception {
+        String email = principal.getAttribute("email");
+        return projectService.editProjectFromUser(id, projectDetails,email);
     }
 
     @DeleteMapping("/project/del/{id}")
-    public ResponseEntity<String> deleteProject(@PathVariable Long id) throws ProjectNotFoundException{
-        return projectService.deleteProject(id);
+    public ResponseEntity<String> deleteProject(@PathVariable Long id,@AuthenticationPrincipal OAuth2User principal) throws ProjectNotFoundException, Exception{
+        String email = principal.getAttribute("email");
+        return projectService.deleteProjectFromUser(id,email);
     }
 }
