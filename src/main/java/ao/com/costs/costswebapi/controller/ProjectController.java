@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import ao.com.costs.costswebapi.domain.Project;
@@ -46,6 +47,7 @@ public class ProjectController {
         return projectService.editProjectFromUser(id, projectDetails,email);
     }
 
+    @Transactional
     @DeleteMapping("/project/del/{id}")
     public ResponseEntity<String> deleteProject(@PathVariable Long id,@AuthenticationPrincipal OAuth2User principal) throws ProjectNotFoundException, Exception{
         String email = principal.getAttribute("email");
