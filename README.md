@@ -19,7 +19,7 @@
 ## Good Practices Applied
 
 - SOLID, DRY, YAGNI, KISS
-- API REST
+- API STATEFULL (using session-based authentication)
 - Queries With Spring Data JPA
 - DI(Dependency Injection)
 - Error Treatments
